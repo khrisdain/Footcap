@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    /* CSS Variables from style guide */
+    :root {
+      /* Colors */
+      --maximum-blue-green_10: hsla(185, 75%, 45%, 0.1);
+      --rich-black-fogra-29: hsl(217, 28%, 9%);
+      --gray-x-11-gray: hsl(0, 0%, 74%);
+      --oxford-blue_60: hsla(230, 41%, 14%, 0.6);
+      --bittersweet: hsl(5, 100%, 69%);
+      --smoky-black: rgb(7, 6, 1);
+      --gainsboro: hsl(0, 0%, 88%);
+      --black_90: hsla(0, 0%, 0%, 0.9);
+      --cultured: hsl(200, 12%, 95%);
+      --salmon: hsl(5, 100%, 73%);
+      --white: hsl(0, 0%, 100%);
+      --black: hsl(0, 0%, 0%);
+      --onyx: hsl(0, 0%, 27%);
+
+      /* Typography */
+      --ff-roboto: 'Roboto', sans-serif;
+      --ff-josefin-sans: 'Josefin Sans', sans-serif;
+
+      --fs-1: 3rem;
+      --fs-2: 2.6rem;
+      --fs-3: 2.2rem;
+      --fs-4: 2rem;
+      --fs-5: 1.8rem;
+      --fs-6: 1.6rem;
+      --fs-7: 1.4rem;
+      --fs-8: 1.2rem;
+
+      --fw-300: 300;
+      --fw-400: 400;
+      --fw-500: 500;
+      --fw-600: 600;
+      --fw-700: 700;
+
+      /* Transition */
+      --transition-1: 0.25s ease;
+      --transition-2: 0.5s ease;
+      --cubic-out: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+      --cubic-in: cubic-bezier(0.33, 0.85, 0.56, 1.02);
+
+      /* Spacing */
+      --section-padding: 60px;
+    }
+
+    /* Reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: var(--ff-roboto);
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-size: var(--fs-6);
+      color: var(--onyx);
+      background-color: var(--cultured);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--ff-josefin-sans);
+      color: var(--rich-black-fogra-29);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    input, button {
+      font: inherit;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    /* Main Cart Layout Styles */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin-inline: auto;
+      padding: var(--section-padding) 20px;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* Checkout Form Styles */
+    .checkout-form {
+      background-color: var(--white);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .checkout-title {
+      font-size: var(--fs-3);
+      margin-bottom: 25px;
+      font-weight: var(--fw-600);
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: var(--fs-7);
+      font-weight: var(--fw-500);
+      margin-bottom: 8px;
+      color: var(--rich-black-fogra-29);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--gainsboro);
+      border-radius: 6px;
+      font-size: var(--fs-7);
+      transition: var(--transition-1);
+    }
+
+    .input-field:focus {
+      border-color: var(--bittersweet);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background-color: var(--bittersweet);
+      color: var(--white);
+      font-size: var(--fs-6);
+      font-weight: var(--fw-600);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: var(--transition-1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checkout-btn:hover {
+      background-color: var(--salmon);
+    }
+
+    /* Order Summary Styles */
+    .order-summary {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-image {
+      height: 50vh;
+      width: 100%;
+      background-color: var(--gainsboro);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-image img {
+      font-size: 8rem;
+      color: var(--gray-x-11-gray);
+    }
+
+    .promo-section {
+      padding: 30px;
+    }
+
+    .promo-title {
+      font-size: var(--fs-5);
+      margin-bottom: 20px;
+      font-weight: var(--fw-600);
+    }
+
+    .promo-input-wrapper {
+      display: flex;
+      margin-bottom: 25px;
+    }
+
+    .promo-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid var(--gainsboro);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      font-size: var(--fs-7);
+    }
+
+    .promo-btn {
+      background-color: var(--rich-black-fogra-29);
+      color: var(--white);
+      padding: 0 20px;
+      border-radius: 0 6px 6px 0;
+      font-weight: var(--fw-500);
+      cursor: pointer;
+      transition: var(--transition-1);
+    }
+
+    .promo-btn:hover {
+      background-color: var(--bittersweet);
+    }
+
+    .save-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .save-info-checkbox {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--gainsboro);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .save-info-checkbox:checked {
+      background-color: var(--bittersweet);
+      border-color: var(--bittersweet);
+    }
+
+    .save-info-checkbox:checked::before {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 12px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .save-info-label {
+      font-size: var(--fs-7);
+      cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <div class="cart-layout">
+        <!-- Checkout Form (Left Side) -->
+        <div class="checkout-form">
+          <h2 class="checkout-title">Checkout Information</h2>
+          
+          <form>
+            <div class="input-group">
+              <label class="input-label" for="fullname">Full Name</label>
+              <input type="text" id="fullname" class="input-field" placeholder="Enter your full name">
+            </div>
+            
+            <div class="input-group">
+              <label class="input-label" for="email">Email Address</label>
+              <input type="email" id="email" class="input-field" placeholder="Enter your email">
+            </div>
+            
+            <div class="input-group">
+              <label class="input-label" for="address">Address</label>
+              <input type="text" id="address" class="input-field" placeholder="Enter your address">
+            </div>
+            
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label" for="city">City</label>
+                <input type="text" id="city" class="input-field" placeholder="Enter your city">
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label" for="postalcode">Postal Code</label>
+                <input type="text" id="postalcode" class="input-field" placeholder="Enter postal code">
+              </div>
+            </div>
+            
+            <button type="button" class="checkout-btn">
+              <span>Complete Purchase</span>
+              <span>$129.99</span>
+            </button>
+          </form>
+        </div>
+        
+        <!-- Order Summary (Right Side) -->
+        <div class="order-summary">
+          <div class="product-image">
+            <img src="../images/product-5.jpg" alt="checkout image">
+          </div>
+          
+          <div class="promo-section">
+            <h3 class="promo-title">Have a promo code?</h3>
+            
+            <div class="promo-input-wrapper">
+              <input type="text" class="promo-input" placeholder="Enter promo code">
+              <button class="promo-btn">Apply</button>
+            </div>
+            
+            <div class="save-info">
+              <input type="checkbox" id="saveinfo" class="save-info-checkbox">
+              <label for="saveinfo" class="save-info-label">Save my information for faster checkout</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
