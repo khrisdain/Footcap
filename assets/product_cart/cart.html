@@ -34,6 +34,8 @@
       --white: hsl(0, 0%, 100%);
       --black: hsl(0, 0%, 0%);
       --onyx: hsl(0, 0%, 27%);
+      --light-bittersweet: hsla(5, 100%, 69%, 0.1);
+      --light-gray: hsl(0, 0%, 96%);
 
       /* Typography */
       --ff-roboto: 'Roboto', sans-serif;
@@ -84,6 +86,10 @@
       color: var(--onyx);
       background-color: var(--cultured);
       line-height: 1.6;
+      background-image: url('../images/3d shoe.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     h1, h2, h3, h4 {
@@ -102,17 +108,88 @@
       outline: none;
     }
 
+    /* Header */
+    .header {
+      background-color: var(--white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-family: var(--ff-josefin-sans);
+      font-size: var(--fs-4);
+      font-weight: var(--fw-700);
+      color: var(--rich-black-fogra-29);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      color: var(--bittersweet);
+      font-size: 2.4rem;
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-7);
+      color: var(--gray-x-11-gray);
+    }
+
+    .progress-step.active {
+      color: var(--bittersweet);
+      font-weight: var(--fw-500);
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--light-gray);
+      color: var(--gray-x-11-gray);
+      font-size: var(--fs-8);
+      font-weight: var(--fw-600);
+    }
+
+    .progress-step.active .step-number {
+      background-color: var(--bittersweet);
+      color: var(--white);
+    }
+
     /* Main Cart Layout Styles */
     .container {
       max-width: 1200px;
       width: 100%;
       margin-inline: auto;
-      padding: var(--section-padding) 20px;
+      padding: 40px 20px;
     }
 
     .cart-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 30px;
       align-items: start;
     }
@@ -120,46 +197,99 @@
     /* Checkout Form Styles */
     .checkout-form {
       background-color: var(--white);
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     }
 
     .checkout-title {
       font-size: var(--fs-3);
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       font-weight: var(--fw-600);
+      color: var(--rich-black-fogra-29);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .checkout-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--bittersweet);
+      border-radius: 2px;
     }
 
     .input-group {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .input-label {
       display: block;
       font-size: var(--fs-7);
       font-weight: var(--fw-500);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: var(--rich-black-fogra-29);
     }
 
     .input-field {
       width: 100%;
-      padding: 12px 15px;
+      padding: 15px 18px;
       border: 1px solid var(--gainsboro);
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: var(--fs-7);
       transition: var(--transition-1);
+      background-color: var(--light-gray);
     }
 
     .input-field:focus {
       border-color: var(--bittersweet);
+      box-shadow: 0 0 0 3px var(--light-bittersweet);
+      background-color: var(--white);
+    }
+
+    .input-field::placeholder {
+      color: var(--gray-x-11-gray);
     }
 
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .payment-methods {
+      display: flex;
       gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .payment-method {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--gainsboro);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-1);
+    }
+
+    .payment-method:hover {
+      border-color: var(--bittersweet);
+    }
+
+    .payment-method.active {
+      border-color: var(--bittersweet);
+      background-color: var(--light-bittersweet);
+    }
+
+    .payment-icon {
+      font-size: 2.2rem;
+      color: var(--rich-black-fogra-29);
     }
 
     .checkout-btn {
@@ -168,50 +298,160 @@
       color: var(--white);
       font-size: var(--fs-6);
       font-weight: var(--fw-600);
-      padding: 15px;
-      border-radius: 6px;
-      margin-top: 10px;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 15px;
       cursor: pointer;
       transition: var(--transition-1);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 10px rgba(229, 87, 84, 0.3);
     }
 
     .checkout-btn:hover {
       background-color: var(--salmon);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(229, 87, 84, 0.4);
+    }
+
+    .checkout-btn:active {
+      transform: translateY(0);
+    }
+
+    .checkout-btn .btn-icon {
+      font-size: 2rem;
     }
 
     /* Order Summary Styles */
     .order-summary {
       background-color: var(--white);
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      height: fit-content;
     }
 
     .product-image {
-      height: 50vh;
+      height: 240px;
       width: 100%;
-      background-color: var(--gainsboro);
+      background-color: var(--light-gray);
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+      position: relative;
     }
 
     .product-image img {
-      font-size: 8rem;
-      color: var(--gray-x-11-gray);
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
     }
 
-    .promo-section {
+    .summary-content {
       padding: 30px;
     }
 
-    .promo-title {
-      font-size: var(--fs-5);
+    .summary-title {
+      font-size: var(--fs-4);
       margin-bottom: 20px;
       font-weight: var(--fw-600);
+      color: var(--rich-black-fogra-29);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .summary-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--bittersweet);
+      border-radius: 2px;
+    }
+
+    .product-list {
+      margin-bottom: 25px;
+    }
+
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gainsboro);
+    }
+
+    .product-details {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+      background-color: var(--light-gray);
+      overflow: hidden;
+    }
+
+    .product-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info h4 {
+      font-size: var(--fs-7);
+      font-weight: var(--fw-500);
+      margin-bottom: 5px;
+    }
+
+    .product-info p {
+      font-size: var(--fs-8);
+      color: var(--gray-x-11-gray);
+    }
+
+    .product-price {
+      font-size: var(--fs-6);
+      font-weight: var(--fw-600);
+      color: var(--rich-black-fogra-29);
+    }
+
+    .price-details {
+      margin-top: 25px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: var(--fs-7);
+    }
+
+    .price-row.total {
+      padding-top: 15px;
+      margin-top: 15px;
+      border-top: 1px solid var(--gainsboro);
+      font-size: var(--fs-6);
+      font-weight: var(--fw-600);
+      color: var(--rich-black-fogra-29);
+    }
+
+    .promo-section {
+      padding-top: 25px;
+      margin-top: 25px;
+      border-top: 1px dashed var(--gainsboro);
+    }
+
+    .promo-title {
+      font-size: var(--fs-6);
+      margin-bottom: 15px;
+      font-weight: var(--fw-500);
+      color: var(--rich-black-fogra-29);
     }
 
     .promo-input-wrapper {
@@ -224,15 +464,21 @@
       padding: 12px 15px;
       border: 1px solid var(--gainsboro);
       border-right: none;
-      border-radius: 6px 0 0 6px;
+      border-radius: 8px 0 0 8px;
       font-size: var(--fs-7);
+      background-color: var(--light-gray);
+    }
+
+    .promo-input:focus {
+      border-color: var(--bittersweet);
+      background-color: var(--white);
     }
 
     .promo-btn {
       background-color: var(--rich-black-fogra-29);
       color: var(--white);
       padding: 0 20px;
-      border-radius: 0 6px 6px 0;
+      border-radius: 0 8px 8px 0;
       font-weight: var(--fw-500);
       cursor: pointer;
       transition: var(--transition-1);
@@ -251,12 +497,13 @@
 
     .save-info-checkbox {
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border: 1px solid var(--gainsboro);
       border-radius: 4px;
       position: relative;
       cursor: pointer;
+      transition: var(--transition-1);
     }
 
     .save-info-checkbox:checked {
@@ -268,7 +515,7 @@
       content: '✓';
       position: absolute;
       color: white;
-      font-size: 12px;
+      font-size: 13px;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -279,7 +526,46 @@
       cursor: pointer;
     }
 
+    /* Footer */
+    .footer {
+      background-color: var(--white);
+      padding: 20px 0;
+      text-align: center;
+      font-size: var(--fs-7);
+      color: var(--gray-x-11-gray);
+      margin-top: 50px;
+      border-top: 1px solid var(--gainsboro);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .footer-link {
+      color: var(--rich-black-fogra-29);
+      transition: var(--transition-1);
+    }
+
+    .footer-link:hover {
+      color: var(--bittersweet);
+    }
+
     /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .cart-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       .cart-layout {
         grid-template-columns: 1fr;
@@ -287,12 +573,57 @@
 
       .form-row {
         grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .checkout-form, 
+      .order-summary {
+        padding: 25px;
+      }
+
+      .header-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .progress-container {
+        width: 100%;
+        justify-content: space-around;
+      }
+
+      .progress-step .step-text {
+        display: none;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Header with Logo and Progress Steps -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <ion-icon name="bag-handle-outline" class="logo-icon"></ion-icon>
+        footcap
+      </a>
+      
+      <div class="progress-container">
+        <div class="progress-step">
+          <div class="step-number">1</div>
+          <span class="step-text">Cart</span>
+        </div>
+        <div class="progress-step active">
+          <div class="step-number">2</div>
+          <span class="step-text">Checkout</span>
+        </div>
+        <div class="progress-step">
+          <div class="step-number">3</div>
+          <span class="step-text">Confirmation</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <main>
     <div class="container">
       <div class="cart-layout">
@@ -328,9 +659,22 @@
               </div>
             </div>
             
+            <label class="input-label">Payment Method</label>
+            <div class="payment-methods">
+              <div class="payment-method active">
+                <ion-icon name="card-outline" class="payment-icon"></ion-icon>
+              </div>
+              <div class="payment-method">
+                <ion-icon name="logo-paypal" class="payment-icon"></ion-icon>
+              </div>
+              <div class="payment-method">
+                <ion-icon name="wallet-outline" class="payment-icon"></ion-icon>
+              </div>
+            </div>
+            
             <button type="button" class="checkout-btn">
               <span>Complete Purchase</span>
-              <span>$129.99</span>
+              <span>$129.99 <ion-icon name="arrow-forward-outline" class="btn-icon"></ion-icon></span>
             </button>
           </form>
         </div>
@@ -338,26 +682,90 @@
         <!-- Order Summary (Right Side) -->
         <div class="order-summary">
           <div class="product-image">
-            <img src="../images/product-5.jpg" alt="checkout image">
+            <img src="../images/product-5.jpg" alt="Premium Headphones">
           </div>
           
-          <div class="promo-section">
-            <h3 class="promo-title">Have a promo code?</h3>
+          <div class="summary-content">
+            <h3 class="summary-title">Order Summary</h3>
             
-            <div class="promo-input-wrapper">
-              <input type="text" class="promo-input" placeholder="Enter promo code">
-              <button class="promo-btn">Apply</button>
+            <div class="product-list">
+              <div class="product-item">
+                <div class="product-details">
+                  <div class="product-thumbnail">
+                    <img src="../images/product-5.jpg" alt="Premium Headphones Thumbnail">
+                  </div>
+                  <div class="product-info">
+                    <h4>Premium Wireless Headphones</h4>
+                    <p>Black | Qty: 1</p>
+                  </div>
+                </div>
+                <div class="product-price">$129.99</div>
+              </div>
             </div>
             
-            <div class="save-info">
-              <input type="checkbox" id="saveinfo" class="save-info-checkbox">
-              <label for="saveinfo" class="save-info-label">Save my information for faster checkout</label>
+            <div class="price-details">
+              <div class="price-row">
+                <span>Subtotal</span>
+                <span>$129.99</span>
+              </div>
+              <div class="price-row">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div class="price-row">
+                <span>Tax</span>
+                <span>$0.00</span>
+              </div>
+              <div class="price-row total">
+                <span>Total</span>
+                <span>$129.99</span>
+              </div>
+            </div>
+            
+            <div class="promo-section">
+              <h3 class="promo-title">Have a promo code?</h3>
+              
+              <div class="promo-input-wrapper">
+                <input type="text" class="promo-input" placeholder="Enter promo code">
+                <button class="promo-btn">Apply</button>
+              </div>
+              
+              <div class="save-info">
+                <input type="checkbox" id="saveinfo" class="save-info-checkbox">
+                <label for="saveinfo" class="save-info-label">Save my information for faster checkout</label>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="#" class="footer-link">Terms & Conditions</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Contact Us</a>
+      </div>
+      <p>© 2025 ShopEase. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Simple script to handle payment method selection
+    const paymentMethods = document.querySelectorAll('.payment-method');
+    
+    paymentMethods.forEach(method => {
+      method.addEventListener('click', () => {
+        // Remove active class from all methods
+        paymentMethods.forEach(m => m.classList.remove('active'));
+        // Add active class to clicked method
+        method.classList.add('active');
+      });
+    });
+  </script>
 </body>
 
 </html>

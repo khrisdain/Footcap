@@ -118,4 +118,13 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 
+//scroll behaviour for the footer
+document.querySelector('a[href="#footer-contact"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  document.querySelector('#footer-contact').scrollIntoView({
+      behavior: 'smooth'
+  });
+});
+
 
