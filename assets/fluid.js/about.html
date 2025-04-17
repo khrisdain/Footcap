@@ -1,38 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-    <meta charset="utf-8">
-    <script src="dist/main.js"></script>
-    <link rel="stylesheet" href="./src/about.css">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footcap - Find your footwear</title>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="../favicon.svg" type="image/svg+xml">
+
+  <!-- main & page-specific CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../fluid.js/src/about.css">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- preload hero banner image -->
+  <link rel="preload" href="../images/about.banner.jpg" as="image">
+
 </head>
+
 <body>
-    <header class="header" data-header>
-        <div class="container">
-    
-          <div class="overlay" data-overlay></div>
-    
-          <a href="#" class="logo">
-            <img src="../../assets/images/logo.svg" width="160" height="50" alt="Footcap logo">
-          </a>
-    
-          <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
-            <ion-icon name="menu-outline"></ion-icon>
-          </button>
-    
-          <nav class="navbar" data-navbar>
-    
-            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
-              <ion-icon name="close-outline"></ion-icon>
+  <header class="header" data-header>
+    <div class="container">
+
+      <div class="overlay" data-overlay></div>
+
+      <a href="#" class="logo">
+        <img src="../images/logo.svg" width="160" height="50" alt="Footcap logo">
+      </a>
+
+      <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <a href="../../index.html" class="logo">
+          <img src="../images/logo.svg" width="190" height="50" alt="Footcap logo">
+        </a>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
+          <li class="navbar-item"><a href="#" class="navbar-link">About</a></li>
+          <li class="navbar-item"><a href="#" class="navbar-link">Products</a></li>
+          <li class="navbar-item"><a href="#" class="navbar-link">Shop</a></li>
+          <li class="navbar-item"><a href="#" class="navbar-link">Blog</a></li>
+          <li class="navbar-item"><a href="#" class="navbar-link">Contact</a></li>
+        </ul>
+
+        <ul class="nav-action-list">
+          <li>
+            <button class="nav-action-btn">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+              <span class="nav-action-text">Search</span>
             </button>
-    
-            <a href="#" class="logo">
-              <img src="../../assets/images/logo.svg" width="190" height="50" alt="Footcap logo">
+          </li>
+          <li>
+            <a href="#" class="nav-action-btn">
+              <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+              <span class="nav-action-text">Login / Register</span>
             </a>
-          </nav>
-    
+          </li>
+          <li>
+            <button class="nav-action-btn">
+              <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+              <span class="nav-action-text">Wishlist</span>
+              <data class="nav-action-badge" value="0" aria-hidden="true">0</data>
+            </button>
+          </li>
+          <li>
+            <a href="/assets/product_cart/cart.html" class="nav-action-btn">
+              <ion-icon id="open-link" name="bag-outline" aria-hidden="true"></ion-icon>
+              <data class="nav-action-text" value="0">Basket: <strong>$0.00</strong></data>
+              <data class="nav-action-badge" value="0" aria-hidden="true">0</data>
+            </a>
+          </li>
+        </ul>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <h1 class="h1 hero-title">About <strong>Us</strong></h1>
+          <p class="hero-text">We are a small business working hard for you to live easier.</p>
         </div>
-      </header>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section philosophy">
+      <div class="container">
+        <h2 class="h2 section-title">Our Philosophy</h2>
+        <p class="philosophy-text">
+          We believe a good footware is a good motivator to get up and make a deference. 
+          So here in <em>Footcap</em> we make it easier for you to take the first step to your full potential.
+        </p>
+      </div>
+    </section>
     
+
+    <!-- Team Section -->
+    <section class="section team">
+      <div class="container">
+        <h2 class="h2 section-title">Our Team</h2>
+        <ul class="has-scrollbar">
+          <li class="product-card">
+            <figure class="card-banner">
+              <img src="../images/Reyhaneh.jpg" alt="Reyhaneh Hosseini" class="image-contain">
+            </figure>
+            <div class="card-content">
+              <h3 class="h3 card-title">Reyhaneh Hosseini</h3>
+              <p class="card-cat">front end</p>
+            </div>
+          </li>
+          <li class="product-card">
+            <figure class="card-banner">
+              <img src="../images/samuel.jpg" alt="Samuel Ilesanmi" class="image-contain">
+            </figure>
+            <div class="card-content">
+              <h3 class="h3 card-title">Samuel Ilesanmi</h3>
+              <p class="card-cat">Head of Product</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2025 BrandName. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="go-top-btn" aria-label="Scroll to Top">
+    <ion-icon name="arrow-up-outline"></ion-icon>
+  </button>
+
 </body>
+
 </html>
