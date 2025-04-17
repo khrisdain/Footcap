@@ -1,143 +1,135 @@
-.header {
-    background: var(--white);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: var(--transition-1);
-    z-index: 4;
+/* about.css */
+
+/*-------------------------------*\
+  HERO SECTION
+\*-------------------------------*/
+
+.hero {
+  background-image: url('../../images/about.banner.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  color: var(--bittersweet);
+}
+
+.hero-title strong {
+  color: var(--rich-black-fogra-29);
+}
+
+.hero-text {
+  font-size: var(--fs-6);
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+/*-------------------------------*\
+  PHILOSOPHY SECTION
+\*-------------------------------*/
+
+.section.philosophy {
+  background-color: #fff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.philosophy-text {
+  padding-top: 2%;
+  font-size: 1.6rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #333;
+}
+
+
+/*-------------------------------*\
+  TEAM SECTION (Centered Photos)
+\*-------------------------------*/
+
+.section.team {
+  background-color: var(--cultured);
+  padding: 4rem 0;
+}
+
+.team .section-title {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+/* Center the entire photo section */
+.has-scrollbar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}
+
+
+/* Individual team cards */
+.product-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 1 1 300px;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+/* Team photo */
+.card-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.card-banner {
+  width: 100%;
+  height: auto;
+}
+
+/* Name + title */
+.card-content {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.card-cat {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+/*-------------------------------*\
+  RESPONSIVE TWEAKS
+\*-------------------------------*/
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.25rem;
   }
-  
-  .header.active { box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.1); }
-  
-  .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: 20px;
+
+  .section-title {
+    font-size: 2rem;
   }
-  
-  .nav-open-btn {
-    font-size: 30px;
-    background: var(--bittersweet);
-    color: var(--white);
-    padding: 8px;
+
+  .hero-text,
+  .about-philosophy {
+    font-size: 1rem;
   }
-  
-  .nav-open-btn:is(:hover, :focus) { background: var(--salmon); }
-  
-  .nav-open-btn ion-icon { --ionicon-stroke-width: 40px; }
-  
-  .navbar {
-    background: var(--white);
-    position: fixed;
-    top: 0;
-    left: -280px;
-    width: 100%;
-    max-width: 270px;
-    height: 100%;
-    border-right: 3px solid var(--rich-black-fogra-29);
-    font-family: var(--ff-roboto);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    z-index: 2;
-    visibility: hidden;
-    transition: 0.25s var(--cubic-out);
-  }
-  
-  .navbar.active {
-    visibility: visible;
-    transform: translateX(280px);
-    transition: 0.5s var(--cubic-in);
-  }
-  
-  .nav-close-btn {
-    color: var(--rich-black-fogra-29);
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 13px;
-    font-size: 25px;
-    transition: var(--transition-1);
-  }
-  
-  .nav-close-btn ion-icon { --ionicon-stroke-width: 55px; }
-  
-  .nav-close-btn:is(:hover, :focus) { color: var(--bittersweet); }
-  
-  .navbar .logo {
-    background: var(--maximum-blue-green_10);
-    padding-block: 50px 40px;
-  }
-  
-  .navbar .logo img { margin-inline: auto; }
-  
-  .navbar-list,
-  .nav-action-list { margin: 30px; }
-  
-  .navbar-list {
-    padding: 20px;
-    border-bottom: 1px solid var(--gainsboro);
-  }
-  
-  .navbar-link {
-    color: var(--rich-black-fogra-29);
-    padding-block: 10px;
-    transition: var(--transition-1);
-  }
-  
-  .navbar-link:is(:hover, :focus) { color: var(--bittersweet); }
-  
-  .navbar-item:not(:last-child) { border-bottom: 1px solid var(--gainsboro); }
-  
-  .nav-action-list > li:first-child { display: none; }
-  
-  .nav-action-btn {
-    color: var(--rich-black-fogra-29);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding-block: 10px;
-    transition: var(--transition-1);
-  }
-  
-  .nav-action-btn:is(:hover, :focus) { color: var(--bittersweet); }
-  
-  .nav-action-btn ion-icon {
-    font-size: 22px;
-    --ionicon-stroke-width: 25px;
-  }
-  
-  .nav-action-text strong {
-    font-weight: initial;
-    color: var(--bittersweet);
-  }
-  
-  .nav-action-badge {
-    margin-left: auto;
-    font-size: var(--fs-8);
-    background: var(--bittersweet);
-    color: var(--white);
-    width: 18px;
-    height: 18px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-  }
-  
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: hsla(0, 0%, 0%, 0.6);
-    z-index: 1;
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition-1);
-  }
-  
-  .overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  
+}
