@@ -1,7 +1,7 @@
 //login functionality 
 const loginPopup = document.createElement('div');
 loginPopup.id = 'login-popup';
-loginPopup.style.display = 'none';
+loginPopup.style.display = 'none'
 
 loginPopup.innerHTML = `
   <div class="login-container">
@@ -16,8 +16,11 @@ loginPopup.innerHTML = `
   </div>
 `;
 
-// Remove the duplicate append
+//append the body
 document.body.appendChild(loginPopup);
+
+//add body class
+document.body.classList.add('login-active');
 
 // Add event listener to the person icon/login button
 const loginButton = document.querySelector('a.nav-action-btn:has(ion-icon[name="person-outline"])');
@@ -134,13 +137,137 @@ async function registerHandler(e) {
     }, 2000);
 }
 
-function updateUIAfterLogin(user) {
-    // Update UI to show logged in status
-    const loginText = document.querySelector('.nav-action-text');
-    loginText.textContent = user.username; // Change "Login / Register" to username
+//log a user out
+function logout() {
+  // Remove current user from local storage
+  localStorage.removeItem('currentUser');
+  
+  // Reset UI
+  const loginText = document.querySelector('.nav-action-text');
+  if (loginText) {
+      loginText.textContent = 'Login / Register';
+  }
+  
+  // Reset the icon
+  const iconElement = document.querySelector('a.nav-action-btn ion-icon');
+  if (iconElement) {
+      iconElement.setAttribute('name', 'person-outline');
+  }
+  
+  // Reset event listeners
+  const loginButton = document.querySelector('a.nav-action-btn:has(ion-icon)');
+  if (loginButton) {
+      // Remove logout listener and add back the toggle popup listener
+      loginButton.removeEventListener('click', logout);
+      loginButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          toggleLoginPopup();
+      });
+  }
+  
+  // Update body classes
+  document.body.classList.remove('logged-in');
+  document.body.classList.add('login-active');
+  
+  // Show logout notification
+  showNotification('Successfully logged out', 'success');
 }
 
 
+//show notification
+function showNotification(message, type = 'success', duration = 3000) {
+  // Remove any existing notifications
+  const existingNotification = document.querySelector('.notification');
+  if (existingNotification) {
+      existingNotification.remove();
+  }
+  
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  
+  // Style the notification
+  notification.style.position = 'fixed';
+  notification.style.top = '20px';
+  notification.style.right = '20px';
+  notification.style.padding = '12px 20px';
+  notification.style.borderRadius = '8px';
+  notification.style.backgroundColor = type === 'success' ? 'var(--bittersweet, hsl(5, 100%, 69%))' : '#ff5252';
+  notification.style.color = 'white';
+  notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+  notification.style.zIndex = '2000';
+  notification.style.transform = 'translateY(-10px)';
+  notification.style.opacity = '0';
+  notification.style.transition = 'all 0.3s ease';
+  
+  // Add to body
+  document.body.appendChild(notification);
+  
+  // Trigger animation
+  setTimeout(() => {
+      notification.style.transform = 'translateY(0)';
+      notification.style.opacity = '1';
+  }, 10);
+  
+  // Auto remove after duration
+  setTimeout(() => {
+      notification.style.transform = 'translateY(-10px)';
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 300);
+  }, duration);
+}
+
+
+
+function updateUIAfterLogin(user) {
+  // Update UI to show logged in status
+  const loginText = document.querySelector('.nav-action-text');
+  if (loginText) {
+      loginText.textContent = user.username; // Change "Login / Register" to username
+  }
+  
+  // Update the login button functionality to handle logout
+  const loginButton = document.querySelector('a.nav-action-btn:has(ion-icon[name="person-outline"])');
+  if (loginButton) {
+      // Remove the toggle popup listener
+      loginButton.removeEventListener('click', toggleLoginPopup);
+      
+      // Add logout listener
+      loginButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          logout();
+      });
+      
+      // Optionally change the icon to a logout icon
+      const iconElement = loginButton.querySelector('ion-icon');
+      if (iconElement) {
+          iconElement.setAttribute('name', 'log-out-outline');
+      }
+  }
+  
+  // Add user menu or additional UI elements if needed
+  document.body.classList.remove('login-active');
+  document.body.classList.add('logged-in');
+}
+
+
+function initLoginSystem() {
+  checkLoginStatus();
+  
+  // Add close button to login popup
+  const loginContainer = document.querySelector('.login-container');
+  if (loginContainer) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-btn';
+      closeBtn.innerHTML = '&times;';
+      closeBtn.addEventListener('click', toggleLoginPopup);
+      loginContainer.appendChild(closeBtn);
+  }
+}
+
+// Replace the existing DOMContentLoaded listener with this
+document.addEventListener('DOMContentLoaded', initLoginSystem);
 
 //in js style
 
@@ -153,8 +280,10 @@ style.textContent = `
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--oxford-blue_60, hsla(230, 41%, 14%, 0.4)); /* Dim overlay */
-    display: none; /* Start hidden */
+    background-color: var(--oxford-blue_60, hsla(230, 41%, 14%, 0.7)); /* Dim overlay: 70% opacity */
+    display: flex; /* Start hidden */
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
   }
   
