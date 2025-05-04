@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,7 +27,7 @@ jobs:
       - name: Pull latest changes
         run: |
           # Pull the latest changes from the remote repository
-          git pull origin main
+          git pull origin main || (echo "Pull failed, attempting fetch and reset" && git fetch origin main && git reset --hard origin/main)
       
       - name: Create daily update
         run: |
@@ -58,8 +57,24 @@ jobs:
           git commit -m "Daily update: $(date +"%Y-%m-%d")"
           
           # Try pushing with pull and rebase strategy in case of conflicts
-          git pull --rebase origin main
-          git push origin main
+          git pull --rebase origin main || git pull origin main
+          
+          # Try pushing up to 3 times with exponential backoff
+          MAX_ATTEMPTS=3
+          ATTEMPT=1
+          until git push origin main || [ $ATTEMPT -gt $MAX_ATTEMPTS ]
+          do
+            echo "Push attempt $ATTEMPT failed, retrying in $((2**ATTEMPT)) seconds..."
+            sleep $((2**ATTEMPT))
+            # Pull again before retry to ensure we have latest changes
+            git pull --rebase origin main || git pull origin main
+            ATTEMPT=$((ATTEMPT+1))
+          done
+          
+          if [ $ATTEMPT -gt $MAX_ATTEMPTS ]; then
+            echo "Failed to push after $MAX_ATTEMPTS attempts. Manual intervention required."
+            exit 1
+          fi
         env:
           # Uses GitHub's automatically provided GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
