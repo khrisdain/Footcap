@@ -1,5 +1,4 @@
 name: Daily Commit
-
 on:
   schedule:
     # Runs at 12:00 UTC (adjust as needed)
@@ -7,10 +6,11 @@ on:
   
   # Allow manual triggers from the Actions tab
   workflow_dispatch:
-
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -40,11 +40,10 @@ jobs:
           git add daily-update.txt
           
           # Create commit with today's date
-          git commit -m "Daily update: $(date +"%Y-%m-%d")"
+          git commit -m "Daily update: $(date +"%Y-%m-%d")" || echo "No changes to commit"
           
           # Push to the repository using token for authentication
           git push origin ${{ github.ref_name }}
         env:
           # Uses GitHub's automatically provided GITHUB_TOKEN
-          # No need to create a personal access token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
